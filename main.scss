@@ -1,0 +1,42 @@
+// Colors
+@import "_utilities/colors";
+
+// Bootstrap
+@import "bootstrap/scss/bootstrap";
+
+// Fonts
+@import "_utilities/fonts";
+
+// Partials
+@import "_partials/header";
+@import "_partials/content";
+@import "_partials/sidebar";
+@import "_partials/footer";
+
+body, html{
+  @include font-regular();
+  font-size: 16px;
+  color: $gray;
+}
+
+img{
+  vertical-align: top;
+  max-width: 100%;
+}
+
+a{
+  text-decoration: none;
+
+  &:hover{
+    text-decoration: none;
+  }
+}
+
+h1,h2,h3,h4,h5,h6{
+  @include font-title-regular();
+  color: $black;
+}
+
+p{
+  line-height: 1.9em;
+}
