@@ -7,6 +7,21 @@
 * Este es el encabezado
 */
 ?>
+<!DOCTYPE html>
+<html <?php language_attributes(); ?>>
+<head>
+    <meta charset="<?php bloginfo('charset'); ?>">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title><?php wp_title('-', true, 'right');?> <?php bloginfo('name'); ?></title>
+    
+    <?php wp_head(); ?>
+
+    <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>">
+
+</head>
+<body <?php body_class();?>>
+
 
 
 <header>
@@ -40,26 +55,13 @@
         </div>
         <nav class="main-menu-container">
             <div class="container">
-                <ul id="mainMenu" class="main-menu">
-                    <li>
-                        <a href="#">INICIO</a>
-                    </li>
-                    <li>
-                        <a href="#">SOBRE NOSOTROS</a>
-                    </li>
-                    <li>
-                        <a href="#">HABITACIONES</a>
-                    </li>
-                    <li>
-                        <a href="#">SERVICIOS</a>
-                    </li>
-                    <li>
-                        <a href="#">BLOG</a>
-                    </li>
-                    <li>
-                        <a href="#">RESERVAR</a>
-                    </li>
-                </ul>
+               <?php wp_nav_menu(array(
+                   'theme_location' => 'main-menu',
+                   'menu_class' => 'main-menu',
+                   'menu_id' => 'mainMenu'
+
+               )); ?>
+                   
                 <a href="#" class="mobile-menu-button" id="mobileMenuButton">
                     MENÚ PRINCIPAL <i class="fas fa-bars"></i>
                 </a>

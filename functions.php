@@ -88,3 +88,11 @@ add_action( 'after_setup_theme', 'slan_custom_theme_features' );
 *
 */
 require_once('includes/scripts-styles.php');
+
+
+/*
+*
+* Registrando zonas de menu
+*
+*/
+require_once('includes/menus.php');
