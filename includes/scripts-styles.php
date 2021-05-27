@@ -27,3 +27,22 @@ function slan_theme_styles(){
 
 }
 add_action('wp_enqueue_scripts', 'slan_theme_styles');
+
+
+/*
+* Registrando y cargando scripts
+*/
+
+function slan_theme_scripts() {
+    // Registrar scripts
+    
+    wp_register_script('parallax', THEMEROOT . '/js/parallax.min.js', array('jquery'), '1.5.0', true);
+	wp_register_script('slan-scripts', THEMEROOT . '/js/main.js', array('jquery', 'parallax'), '1.0', true);
+
+
+    // Cargar scripts
+    wp_enqueue_script('slan-scripts');
+}
+
+add_action('wp_enqueue_scripts','slan_theme_scripts');
+
