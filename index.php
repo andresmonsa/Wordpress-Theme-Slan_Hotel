@@ -7,7 +7,37 @@
     <section class="main-banner" style="background-image: url('<?php echo IMAGES; ?>/homebanner.jpg');">
         <div class="main-banner-inner">
             <div class="container">
-                <h1>BLOG</h1>
+                
+                <?php if (is_category()): ?>
+                    <h1> <?php _e('Categoria:', 'slan');?> <?php single_cat_title(); ?></h1>
+                <?php elseif(is_tag()) :?>
+                    <h1> <?php _e('Etiqueta:', 'slan');?> <?php single_tag_title(); ?></h1>
+                <?php elseif(is_search()) :?>
+                    <h1> <?php _e('Resultado de búsqueda para:', 'slan');?> <?php the_search_query(); ?></h1>
+                <?php elseif(is_day()) :?>
+                    <h1> <?php _e('Archivo:', 'slan');?> <?php the_time( get_option('date_format')); ?></h1>
+                <?php elseif(is_month()) :?>
+                    <h1> <?php _e('Archivo:', 'slan');?> <?php the_time( 'F Y' ); ?></h1>
+                <?php elseif(is_year()) :?>
+                    <h1> <?php _e('Archivo:', 'slan');?> <?php the_time( 'Y' ); ?></h1>
+                <?php elseif(is_author()) :?>
+                    <h1> <?php _e('Artículos de:', 'slan');?> <?php  ?>
+                        <?php $curauth = (isset($_GET['author_name'])) ? get_user_by('slug', $author_name) : get_userdata(intval($author)); ?>
+                        <?php echo $curauth->display_name;  ?>
+                    </h1>
+                <?php elseif(is_404()) :?>
+                    <h1> <?php _e('No se encontró la página', 'slan');?> </h1>
+                <?php elseif(is_home()) :?>
+                    <?php if ( is_front_page() ): ?>
+                            <h1> <?php _e('Blog', 'slan');?> </h1>
+                        <?php else : ?>
+                            <h1> <?php wp_title(' ', true, 'right');?> </h1>
+                    <?php endif;?>
+                <?php else: ?>
+                    <h1> <?php wp_title(' ', true, 'right');?> </h1>
+                    
+                <?php endif;?>
+                
             </div>
         </div>
     </section>
@@ -25,7 +55,7 @@
                                     <?php if ( have_posts() ): while( have_posts() ): the_post();  ?>
                                        
                                 <div class="col-md-6 post-col">
-                                    <article class="post">
+                                    <article id="post-<?php the_ID(); ?>" <?php post_class('post') ?>>
                                         
                                         <?php if ( ! has_post_format('video') ): ?>
 
@@ -55,25 +85,37 @@
                                 </div>
 
 
-                                    <?php endwhile; endif; ?>
+                                    <?php endwhile; else : ?>
+
+                                        <?php get_template_part('template-parts/content', 'nopost') ?>
+
+                                    <?php endif;?>
                          
                         
                         </div>
-
-                        <div class="row">
-                            <div class="col">
-                                <div class="post-navigation">
-                                    <nav class="nav justify-content-between">
-                                        <div class="before-posts-link">
-                                            <a href="#"><i class="fa fa-arrow-left" aria-hidden="true"></i> Artículos antiguos</a>
-                                        </div>
-                                        <div class="next-posts-link">
-                                            <a href="#">Artículos recientes <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
-                                        </div>
-                                    </nav>
+                        
+                        <?php if( get_next_posts_link() || get_previous_posts_link()): ?>
+                           
+                            <div class="row">
+                                <div class="col">
+                                    <div class="post-navigation">
+                                        <nav class="nav justify-content-between">
+                                            <div class="before-posts-link">
+                                            
+                                                <?php next_posts_link( __('<i class="fa fa-arrow-left" aria-hidden="true"></i> Entradas antiguas','slan')); ?>
+                                            </div>
+                                            <div class="next-posts-link">
+                                            
+                                                <?php previous_posts_link( __( 'Artículos recientes <i class="fa fa-arrow-right" aria-hidden="true"></i>','slan')); ?>
+                                            </div>
+                                        </nav>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
+                             </div>
+
+                        <?php endif; ?>
+
+
                     </div>
                 </div>
                 <div class="col-md-3">
