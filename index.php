@@ -1,16 +1,7 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <title>Document</title>
-    
-    <?php wp_head(); ?>
-</head>
-<body>
 
 <?php get_header(); ?>
+
+
 
 <section class="main">
     <section class="main-banner" style="background-image: url('<?php echo IMAGES; ?>/homebanner.jpg');">
@@ -24,111 +15,49 @@
     <section class="page-content">
         <div class="container">
             <div class="row">
-                <div class="col-md-9">
+                <?php if ( is_active_sidebar('main-sidebar')): ?>
+                    <div class="col-md-9">
+                        <?php else: ?>
+                            <div class="col-md-12 post-col">
+                        <?php endif; ?>
                     <div class="main-content">
                         <div class="row">
-                            <div class="col-md-6 post-col">
-                                <article class="post">
-                                    <div class="post-thumbnail">
-                                        <img src="img/post1.jpg" alt="">
-                                    </div>
-                                    <div class="post-content">
-                                        <h2 class="post-title">Titulo del artículo</h2>
-                                        <div class="post-excerpt">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid animi
-                                                aspernatur beatae consequatur corporis doloremque eligendi fugiat hic
-                                                illum inventore ipsum minus, nulla officia quae reprehenderit ut veniam,
-                                                voluptatum. Quibusdam!</p>
+                                    <?php if ( have_posts() ): while( have_posts() ): the_post();  ?>
+                                       
+                                <div class="col-md-6 post-col">
+                                    <article class="post">
+                                        
+                                        <?php if ( ! has_post_format('video') ): ?>
+
+
+                                            <?php if ( has_post_thumbnail() ): ?>
+                                                <div class="post-thumbnail">
+                                                    <?php the_post_thumbnail('blog_size_image'); ?>
+                                                </div>
+                                            <?php endif ?>
+
+                                        <?php else: ?>
+
+                                            <div class="post-thumbnail">
+                                                <?php the_content(); ?>
+                                            </div>
+                                            
+                                        <?php endif ?>
+
+                                        <div class="post-content">
+                                            <h2 class="post-title"><?php the_title(); ?></h2>
+                                            <div class="post-excerpt">
+                                                <?php the_excerpt(); ?>
+                                            </div>
+                                            <a href="<?php the_permalink(); ?>" class="view-more-button btn btn-primary"><?php _e('VER MÁS', 'slan'); ?></a>
                                         </div>
-                                        <a href="#" class="view-more-button btn btn-primary">VER MÁS</a>
-                                    </div>
-                                </article>
-                            </div>
-                            <div class="col-md-6 post-col">
-                                <article class="post">
-                                    <div class="post-thumbnail">
-                                        <img src="img/post2.jpg" alt="">
-                                    </div>
-                                    <div class="post-content">
-                                        <h2 class="post-title">Titulo del artículo</h2>
-                                        <div class="post-excerpt">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid animi
-                                                aspernatur beatae consequatur corporis doloremque eligendi fugiat hic
-                                                illum inventore ipsum minus, nulla officia quae reprehenderit ut veniam,
-                                                voluptatum. Quibusdam!</p>
-                                        </div>
-                                        <a href="#" class="view-more-button btn btn-primary">VER MÁS</a>
-                                    </div>
-                                </article>
-                            </div>
-                            <div class="col-md-6 post-col">
-                                <article class="post">
-                                    <div class="post-thumbnail">
-                                        <img src="img/post3.jpg" alt="">
-                                    </div>
-                                    <div class="post-content">
-                                        <h2 class="post-title">Titulo del artículo</h2>
-                                        <div class="post-excerpt">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid animi
-                                                aspernatur beatae consequatur corporis doloremque eligendi fugiat hic
-                                                illum inventore ipsum minus, nulla officia quae reprehenderit ut veniam,
-                                                voluptatum. Quibusdam!</p>
-                                        </div>
-                                        <a href="#" class="view-more-button btn btn-primary">VER MÁS</a>
-                                    </div>
-                                </article>
-                            </div>
-                            <div class="col-md-6 post-col">
-                                <article class="post">
-                                    <div class="post-thumbnail">
-                                        <img src="img/post4.jpg" alt="">
-                                    </div>
-                                    <div class="post-content">
-                                        <h2 class="post-title">Titulo del artículo</h2>
-                                        <div class="post-excerpt">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid animi
-                                                aspernatur beatae consequatur corporis doloremque eligendi fugiat hic
-                                                illum inventore ipsum minus, nulla officia quae reprehenderit ut veniam,
-                                                voluptatum. Quibusdam!</p>
-                                        </div>
-                                        <a href="#" class="view-more-button btn btn-primary">VER MÁS</a>
-                                    </div>
-                                </article>
-                            </div>
-                            <div class="col-md-6 post-col">
-                                <article class="post">
-                                    <div class="post-thumbnail">
-                                        <img src="img/post5.jpg" alt="">
-                                    </div>
-                                    <div class="post-content">
-                                        <h2 class="post-title">Titulo del artículo</h2>
-                                        <div class="post-excerpt">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid animi
-                                                aspernatur beatae consequatur corporis doloremque eligendi fugiat hic
-                                                illum inventore ipsum minus, nulla officia quae reprehenderit ut veniam,
-                                                voluptatum. Quibusdam!</p>
-                                        </div>
-                                        <a href="#" class="view-more-button btn btn-primary">VER MÁS</a>
-                                    </div>
-                                </article>
-                            </div>
-                            <div class="col-md-6 post-col">
-                                <article class="post">
-                                    <div class="post-thumbnail">
-                                        <img src="img/post6.jpg" alt="">
-                                    </div>
-                                    <div class="post-content">
-                                        <h2 class="post-title">Titulo del artículo</h2>
-                                        <div class="post-excerpt">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid animi
-                                                aspernatur beatae consequatur corporis doloremque eligendi fugiat hic
-                                                illum inventore ipsum minus, nulla officia quae reprehenderit ut veniam,
-                                                voluptatum. Quibusdam!</p>
-                                        </div>
-                                        <a href="#" class="view-more-button btn btn-primary">VER MÁS</a>
-                                    </div>
-                                </article>
-                            </div>
+                                    </article>
+                                </div>
+
+
+                                    <?php endwhile; endif; ?>
+                         
+                        
                         </div>
 
                         <div class="row">
